@@ -1,22 +1,20 @@
 // src/app.ts
 import express from "express";
 import cors from "cors";
-import authRoutes from "./routes/auth.js";
+import loadRoutes from "./routes/index.ts";
 
-// Initialisation de l'application Express
 const app = express();
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes de base
+// Route racine pour tester le serveur
 app.get("/", (req, res) => {
   res.send("Bienvenue sur FriendShip Playlist API 🎵");
 });
 
-// Routes d'authentification
-app.use("/auth", authRoutes);
+// Charger toutes les routes via l'index
+loadRoutes(app);
 
 export default app;
